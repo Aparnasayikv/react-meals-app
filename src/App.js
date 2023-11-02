@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useGlobalContext } from "./context";
+import "./App.css";
 
-function App() {
+import Search from "./Components/Search";
+import Favorites from "./Components/Favorites";
+import Meals from "./Components/Meals";
+import Modal from "./Components/Modal";
+
+export default function App() {
+  const { showModal, favorites } = useGlobalContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Search />
+      {favorites.length > 0 && <Favorites />}
+
+      <Meals />
+      {showModal && <Modal />}
+    </main>
   );
 }
-
-export default App;
